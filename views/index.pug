@@ -1,5 +1,11 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+	
+	include navbar
+
+	h1= title
+	-for (let i = 0; i < users.length; i++){
+		li= users[i].name
+	-}
+
