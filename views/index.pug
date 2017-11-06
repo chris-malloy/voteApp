@@ -1,15 +1,19 @@
 extends layout
-
-block content
 	
+block content
 	include navbar
-	.container
-		.row
-			.col-sm-12
-				h1= title
-				-if(name)
-					h1 Welcome, #{name}
 
-				-for (let i = 0; i < users.length; i++)
-					li= users[i].name
+	//- -for (let i = 0; i < users.length; i++)
+	//- 	li= users[i].name
+	.container
+		h1= title
+		-if(name)
+			h1 Welcome, #{name}
+		h3 #{band.title}
+		img(src=`${band.imageUrl}`)
+		
+		
+
+		
+		
 

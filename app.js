@@ -4,8 +4,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var config = ('./config/config');
-console.log(config.sessionSalt)
+var config = require('./config/config');
 var session = require('express-session');
 
 var index = require('./routes/index');
@@ -14,7 +13,7 @@ var users = require('./routes/users');
 var app = express();
 
 var sessionOptions = {
-    secret: "HawkeysWin",
+    secret: config.sessionSalt,
     resave: false,
     saveUninitialized: true
 }

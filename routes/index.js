@@ -16,17 +16,24 @@ router.get('/', function(req, res, next) {
     if (req.session.name != undefined) {
         console.log(`Welcome, ${req.session.name}`);
     }
-    var selectQuery = "SELECT * FROM users;";
-    connection.query(selectQuery, (error, results) => {
-        if (error) {
-            throw error;
-        } else {
-            res.render('index', {
-                title: 'Rock or Not',
-                users: results,
-                name: req.session.name
-            });
-        }
+    const getBands = new Promise((resolve, reject) => {
+        var selectQuery = "SELECT * FROM bands;";
+        connection.query(selectQuery, (error, results, fields) => {
+            if (error) {
+                reject(error)
+            } else {
+                var rand = Math.floor(Math.random() * results.length);
+                resolve(results[rand]);
+            }
+        });
+    });
+    getBands.then((bandObj) => {
+        console.log(bandObj);
+        res.render('index', {
+            title: 'Rock or Not',
+            name: req.session.name,
+            band: bandObj
+        });
     })
 });
 

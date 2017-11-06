@@ -1,16 +1,16 @@
 .navbar.navbar-default(role='navigation')
 	.container-fluid
 		.navbar-header
-			button.navbar-toggle(type='button', data-toggle='collapse', data-target='.navbar-collapse')
+			button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='.navbar-collapse')
 				span.sr-only Rock or Not
 			a.navbar-brand(href='/') Rock or Not
 		.navbar-collapse.collapse
 			ul.nav.navbar-nav
-				li
+				li.active
 					a(href='/register') Register
-				li
+				li.active
 					a(href='/login') Login
-				li 
+				li.active
 					a(href='/standings') Standings
 
 
