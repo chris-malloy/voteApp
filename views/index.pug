@@ -9,10 +9,15 @@ block content
 		h1= title
 		-if(name)
 			h1 Welcome, #{name}
-		h3 #{band.title}
-		img(src=`${band.imageUrl}`)
+		.col-sm-6.col-sm-offset-3.band-image.text-center
+			h3 #{band.title}
+			img(src=`/images/${band.imageUrl}`)
+			a(href=`/vote/up/${band.id}`)
+				button(class="btn btn-success" type="submit") Rocks!
+			a(href=`/vote/down/${band.id}`)
+				button(class="btn btn-danger" type="submit") Sucks!
 		
-		
+			
 
 		
 		

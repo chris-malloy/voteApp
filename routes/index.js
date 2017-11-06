@@ -13,8 +13,9 @@ connection.connect((error) => {
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-    if (req.session.name != undefined) {
-        console.log(`Welcome, ${req.session.name}`);
+    if (req.session.name == undefined) {
+        res.redirect('/login?msg=mustLogin');
+        return;
     }
     const getBands = new Promise((resolve, reject) => {
         var selectQuery = "SELECT * FROM bands;";
@@ -86,9 +87,10 @@ router.post("/loginProcess", (req, res, next) => {
                 // password = user pass, results[0].password = hash saved to database
                 var passwordsMatch = bcrypt.compareSync(password, results[0].password);
                 if (passwordsMatch) {
-                    req.session.name = results[0].name;
-                    req.session.id = results[0].id;
-                    req.session.email = results[0].email;
+                    var row = results[0];
+                    req.session.name = row.name;
+                    req.session.uid = row.id;
+                    req.session.email = row.email;
                     res.redirect('/');
                 } else {
                     res.redirect('/login?msg=badPass');
@@ -97,6 +99,21 @@ router.post("/loginProcess", (req, res, next) => {
         };
     });
 });
+
+router.get('/vote/:direction/:bandId', (req, res, next) => {
+    var bandId = req.params.bandId;
+    var direction = req.params.direction;
+    var insertVoteQuery = `INSERT INTO votes (imageID,voteDirection,userID) VALUES (?,?,?);`;
+    connection.query(insertVoteQuery, [bandId, direction, req.session.uid], (error, results) => {
+        if (error) {
+            throw error;
+        } else {
+            res.redirect('/');
+        }
+    })
+
+})
+
 
 /* Standings */
 router.get("/standings", (req, res, next) => {
