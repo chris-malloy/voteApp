@@ -1,11 +1,22 @@
-nav.navbar.navbar-default
-    .container-fluid
-        .navbar-header
-            a.navbar-brand(href="#">WebSiteName)
+body
+	.container
+		.navbar.navbar-default(role='navigation')
+			.container-fluid
+				.navbar-header
+					button.navbar-toggle(type='button', data-toggle='collapse', data-target='.navbar-collapse')
+						span.sr-only Rock or Not
+					a.navbar-brand(href='/') Rock or Not
+				.navbar-collapse.collapse
+					ul.nav.navbar-nav
+						li.active
+							a(href='#') Register
+						li
+							a(href='#') Login
+					ul.nav.navbar-nav.navbar-right
+						li.active
+							a(href='./') Default
+						li
+							a(href='../navbar-static-top/') Static top
+						li
+							a(href='../navbar-fixed-top/') Fixed top
 
-        ul.nav.navbar-nav
-            li.active
-                a(href="/")=title
-            li
-                a(href="/login") Login
-            

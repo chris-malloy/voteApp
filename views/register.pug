@@ -1,0 +1,18 @@
+extends layout
+
+block content
+
+    include navbar
+    .container
+        .row
+            .col-sm-12
+                h1 Register
+                form(action="/registerProcess", method="post")
+                    .form-group
+                        label(for="name") Name:
+                        input(type="text" class="form-control" name="name")
+                        label(for="email") Email Address:
+                        input(type="email" class="form-control" name="email")
+                        label(for="password") Password:
+                        input(type="password" class="form-control" name="password")
+                        button(class="btn btn-primary") Register!

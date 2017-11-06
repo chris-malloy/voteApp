@@ -1,0 +1,16 @@
+extends layout
+
+block content
+
+    include navbar
+    .container
+        .row
+            .col-sm-12
+                h1 Login
+                form(action="/loginProcess", method="post")
+                    .form-group
+                        label(for="email") Email Address:
+                        input(type="email" class="form-control" name="email")
+                        label(for="password") Password:
+                        input(type="password" class="form-control" name="password")
+                        button(class="btn btn-primary") Login!
