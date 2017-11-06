@@ -3,9 +3,11 @@ extends layout
 block content
 	
 	include navbar
-
-	h1= title
-	-for (let i = 0; i < users.length; i++){
-		li= users[i].name
-	-}
+	.container
+		.row
+			.col-sm-12
+				h1= title
+				-for (let i = 0; i < users.length; i++){
+					li= users[i].name
+				-}
 
