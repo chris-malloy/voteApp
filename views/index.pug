@@ -7,7 +7,9 @@ block content
 		.row
 			.col-sm-12
 				h1= title
-				-for (let i = 0; i < users.length; i++){
+				-if(name)
+					h1 Welcome, #{name}
+
+				-for (let i = 0; i < users.length; i++)
 					li= users[i].name
-				-}
 

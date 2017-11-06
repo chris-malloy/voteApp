@@ -14,11 +14,10 @@ var users = require('./routes/users');
 var app = express();
 
 var sessionOptions = {
-    secret: config.sessionSalt,
+    secret: "HawkeysWin",
     resave: false,
     saveUninitialized: true
 }
-console.log(sessionOptions)
 app.use(session(sessionOptions));
 
 // view engine setup

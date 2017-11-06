@@ -23,7 +23,8 @@ router.get('/', function(req, res, next) {
         } else {
             res.render('index', {
                 title: 'Rock or Not',
-                users: results
+                users: results,
+                name: req.session.name
             });
         }
     })
@@ -33,7 +34,6 @@ router.get('/', function(req, res, next) {
 router.get("/register", (req, res, next) => {
     res.render('register', {});
 })
-
 router.post("/registerProcess", (req, res, next) => {
     var name = req.body.name;
     var email = req.body.email;
