@@ -1,0 +1,8 @@
+extends layout
+
+block content 
+    form(action="/uploadBand", method="post" enctype="multipart/form-data")
+        .col-sm-10.col-sm-offset-2
+            input(type="text" name="bandName" placeholder="Band Name")
+            input(type="file" name="imageToUpload")
+            input(type="submit" class="btn btn-primary")

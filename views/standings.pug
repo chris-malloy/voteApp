@@ -1,8 +1,36 @@
 extends layout
 
 block content
+    
     include navbar
     .container
         .row
             .col-sm-12
-                h1 Standings
+                h1 Welcome to Standings Page
+                .container
+                    .row
+                        .col-sm-8.col-sm-offset-2.text-center
+                            button(class="btn btn-default" id="all-bands") All Bands
+                            button(class="btn btn-success" id="top-rated") Top Rated
+                            button(class="btn btn-danger" id="worst-rated") Worst Rated
+
+                        .col-sm-6.grid
+                            -standingsResults.map((band)=>{
+                                -if(band.total > 6) {
+                                    -var cls = "top-rated"
+                                -} else if(band.total < 3) {
+                                    -var cls = "worst-rated"
+                                -} else {
+                                    -var cls="middle"
+                                -}
+                                div(class=`col-sm-12 ${cls}`)
+                                    h3=band.title
+                                    .col-sm-6
+                                        img(src=`/images/${band.imageUrl}`)
+                                    .col-sm-3
+                                        img(src="/images/thumbsUp.png")
+                                        p #{band.upVotes}
+                                    .col-sm-3
+                                        img(src="/images/thumbsDown.png")
+                                        p #{band.downVotes}
+                            -})
