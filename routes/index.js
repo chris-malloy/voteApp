@@ -1,9 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const mysql = require('mysql')
-const config = require('../config/config')
+const mysql = require('mysql');
+const config = require('../config/config');
 const bcrypt = require('bcrypt-nodejs');
-
 const fs = require('fs');
 const multer = require('multer');
 const uploadDir = multer({
@@ -173,6 +172,49 @@ router.post('/formSubmit', nameOfFileField, (req, res) => {
                 res.redirect('/')
             })
         })
+    })
+})
+router.get('', function(req, res, next) {
+    if (req.session.name === undefined) {
+        res.redirect('/login');
+    } else {
+        var name = req.session.name;
+        var email = req.session.email;
+        res.render('users', {
+            name: name,
+            email: email
+        })
+    }
+});
+
+router.post('/userProcess', (req, res, next) => {
+    var name = req.body.name;
+    var email = req.body.email;
+    var password = req.body.password;
+    if (email = "") {
+        res.redirect('/user?msg=emptyEmail');
+        return;
+    }
+    if ((password == "") || (name == "")) {
+        var updateQuery = `UPDATE users SET 
+            name = ?, 
+            email = ? 
+            WHERE id = ?;`;
+        var queryParams = [name, email, req.session.uid];
+    } else {
+        var updateQuery = `UPDATE users SET 
+            name = ?, 
+            email = ?,
+            password = ?
+            WHERE id = ?;`;
+        var hash = bcrypt.hashSync(password);
+        var queryParams = [name, email, hash, req.session.uid];
+    }
+    connection.query(updateQuery, queryParams, (error, results) => {
+        if (error) {
+            throw error;
+        }
+        res.redirect('/')
     })
 })
 

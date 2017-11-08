@@ -10,9 +10,10 @@ block content
                 form(action="/registerProcess", method="post")
                     .form-group
                         label(for="name") Name:
-                        input(type="text" class="form-control" name="name")
+                        input(type="text" value=`${name}` class="form-control" name="name")
                         label(for="email") Email Address:
-                        input(type="email" class="form-control" name="email")
+                        input(type="email" value=`${email}` class="form-control" name="email")
                         label(for="password") Password:
-                        input(type="password" class="form-control" name="password")
+                        input(type="password" value = "" class="form-control" name="password")
+                        input(type="checkbox")
                         button(class="btn btn-primary") Register!
