@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const mysql = require('mysql');
-const config = require('../config/config');
+const config = require('../config/config.js');
 const bcrypt = require('bcrypt-nodejs');
 const fs = require('fs');
 const multer = require('multer');
@@ -27,8 +27,7 @@ router.get('/', function(req, res, next) {
         var selectQuery = `
         SELECT * FROM images WHERE id NOT IN(
             SELECT imgID FROM votes WHERE userID = ?
-        );
-    `
+        );`
             // var selectQuery = 'SELECT * FROM images;';
         connection.query(selectQuery, [req.session.uid], (error, results, field) => {
             var rand = Math.floor(Math.random() * results.length);
@@ -69,7 +68,7 @@ router.post("/registerProcess", (req, res, next) => {
             });
         };
     });
-})
+});
 
 /* Login */
 router.get("/login", (req, res, next) => {
